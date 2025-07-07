@@ -8,7 +8,7 @@
  *  Gabriel Cruz <gabrieldemelocruz@gmail.com>
  */
 
-#include "tydos.h"
+#include "cruxos.h"
 
 int main()
 {

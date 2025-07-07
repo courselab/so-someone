@@ -10,10 +10,10 @@
  */
 
 /* This is a trivial user library that should be statically linked against
-   programs meant for running on TyDOS. It provides some custom C functions
+   programs meant for running on CruxOS. It provides some custom C functions
    that invoke system calls for trivial tasks. */
 
-#include "tydos.h"
+#include "cruxos.h"
 
 /* The syscall function.
 

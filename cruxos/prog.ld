@@ -21,10 +21,10 @@ SECTIONS
         .bin :
 	{
           *.o   (.text .data .bss .rodata) /* Command line objects. */
-	  libtydos.o (.text .data .bss .rodata) /* Runtime library. */
+	  libcruxos.o (.text .data .bss .rodata) /* Runtime library. */
 	}
 }
-INPUT(libtydos.a)		/* Link with the TyDOS user library. */
+INPUT(libcruxos.a)		/* Link with the CruxOS user library. */
 
 
 

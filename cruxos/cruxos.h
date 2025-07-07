@@ -9,14 +9,14 @@
  *  Gabriel Cruz <gabrieldemelocruz@gmail.com>
  */
 
-/* Library libtydos.a should be statically linked against user programs meant
-   for running on TyDOS. It provides some custom C functions that invoke system
+/* Library libcruxos.a should be statically linked against user programs meant
+   for running on CruxOS. It provides some custom C functions that invoke system
    calls for trivial tasks.
 
    This is the header file that should be included in the user programs. */
 
-#ifndef TYDOS_H
-#define TYDOS_H
+#ifndef CRUXOS_H
+#define CRUXOS_H
 
 /* Syscall numbers. */
 
@@ -26,4 +26,4 @@
 
 void puts(const char *str); /* Outputs 'str' on the screen. */
 
-#endif /* TYDOS_H  */
+#endif /* CRUXOS_H  */

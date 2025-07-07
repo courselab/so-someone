@@ -85,7 +85,7 @@ void shell()
 struct cmd_t cmds[] =
     {
         {"help", f_help}, /* Print a help message.       */
-        {"quit", f_quit}, /* Exit TyDOS.                 */
+        {"quit", f_quit}, /* Exit CruxOS.                 */
         {"hello", f_hello}, /* Execute an example program. */
         {0, 0}};
 
@@ -96,7 +96,7 @@ void f_help()
   kwrite("...me, Obi-Wan, you're my only hope!\n\n");
   kwrite("   But we can try also some commands:\n");
   kwrite("      hello   (to run a sample user program\n");
-  kwrite("      quit    (to exit TyDOS)\n");
+  kwrite("      quit    (to exit CruxOS)\n");
 }
 
 void f_quit()
@@ -110,12 +110,12 @@ void f_quit()
    Execute an example user program which invokes a syscall.
 
    The example program (built from the source 'prog.c') is statically linked
-   to the kernel by the linker script (tydos.ld). In order to extend the
+   to the kernel by the linker script (cruxos.ld). In order to extend the
    example, and load and external C program, edit 'f_exec' and 'prog.c' choosing
    a different name for the entry function, such that it does not conflict with
    the 'main' function of the external program.  Even better: remove 'f_exec'
-   entirely, and suppress the 'example_program' section from the tydos.ld, and
-   edit the Makefile not to include 'prog.o' and 'libtydos.o' from 'tydos.bin'.
+   entirely, and suppress the 'example_program' section from the cruxos.ld, and
+   edit the Makefile not to include 'prog.o' and 'libcruxos.o' from 'cruxos.bin'.
 
   */
 
