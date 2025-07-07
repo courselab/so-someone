@@ -123,14 +123,17 @@ syscall_table:
 	.long sys_exit		/* Syscall 1: exit.      */
 	.long sys_write		/* Syscall 2: write      */
 
+/* this function contains a bug: */
+/* it does not read the whole 44 bytes in %al*/
+/* because int 0x13 stops reading at the end of the track */
 load_dir:
 	pusha
 	mov boot_drive, %dl
 	mov $0x2, %ah
 	mov $44, %al
 	mov $0, %ch /* c */
-	mov $0, %dh /* h */
-	mov $30, %cl /* s */
+	mov $1, %dh /* h */
+	mov $13, %cl /* s */
 	mov $_DIR_ADDR, %bx
 	int $0x13
 
