@@ -140,6 +140,13 @@ libcruxos.a : libcruxos.o
 .PHONY: clean
 
 clean:
-	rm -f *.bin *.o *~ *.s *.a
+	rm -f *.bin *.o *~ *.s *.a *.img
+
+# Create a 1.44 MB floppy image (2880 * 512 bytes)
+disk.img:
+	rm -f $@
+	dd if=/dev/zero of=$@ count=2880
+	./format -r 10 $@
+
 # SYSeg's  convenience rules (not related to the example itself)
 include bintools.mk
