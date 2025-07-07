@@ -143,16 +143,17 @@ diss d diss* : $(IMG)
 ##
 
 #
-#
-# %/run : %
-# 	@i=$< &&\
-# 	if test $${i##*.} = "img"; then\
-# 	    make run-fd IMG=$<;\
-# 	 else\
-# 	   if test $${i##*.} = "bin"; then\
-# 	     make run-bin IMG=$<;\
-# 	    fi;\
-# 	fi
+
+%/run : %
+	@i=$< &&\
+	if test $${i##*.} = "img"; then\
+		make run-img IMG=$<;\
+	else\
+		if test $${i##*.} = "bin"; then\
+			make run-bin IMG=$<;\
+		fi;\
+	fi
+
 #
 # %/bin : %
 # 	make run-bin IMG=$<
@@ -160,8 +161,8 @@ diss d diss* : $(IMG)
 # %/fd : %
 # 	make run-fd IMG=$<
 
-%/run : %
-	make run IMG=$<
+# %/run : %
+# 	make run IMG=$<
 
 run: $(IMG)
 	qemu-system-i386 -drive format=raw,file=$< -net none
@@ -170,15 +171,10 @@ run: $(IMG)
 
 run-bin: $(IMG)
 	qemu-system-i386 -drive format=raw,file=$< -net none
-	@echo "Shortcut run-bin is deprecated: use 'make run' instead."
 
-run-iso: $(IMG)
-	qemu-system-i386 -drive format=raw,file=$< -net none
-	@echo "Shortcut run-iso is deprecated: use 'make run' instead."
+run-img : $(IMG)
+	qemu-system-i386 -drive if=floppy,format=raw,file=disk.img -boot a -net none
 
-run-fd : $(IMG)
-	qemu-system-i386 -drive format=raw,file=$< -net none
-	@echo "Shortcut run-fd is deprecated: use 'make run' instead."
 
 
 
