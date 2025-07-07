@@ -1,43 +1,43 @@
 /*
- *    SPDX-FileCopyrightText: 2021 Monaco F. J. <monaco@usp.br>
- *    SPDX-FileCopyrightText: 2025 Gabriel Cruz <gabrieldemelocruz@gmail.com>
- *   
- *    SPDX-License-Identifier: GPL-3.0-or-later
- *
- *  This file is a derivative of SYSeg (https://gitlab.com/monaco/syseg)
- *  and includes modifications made by the following author(s):
- *  Gabriel Cruz <gabrieldemelocruz@gmail.com>
- */
+*    SPDX-FileCopyrightText: 2021 Monaco F. J. <monaco@usp.br>
+*    SPDX-FileCopyrightText: 2025 Gabriel Cruz <gabrieldemelocruz@gmail.com>
+*   
+*    SPDX-License-Identifier: GPL-3.0-or-later
+*
+*  This file is a derivative of SYSeg (https://gitlab.com/monaco/syseg)
+*  and includes modifications made by the following author(s):
+*  Gabriel Cruz <gabrieldemelocruz@gmail.com>
+*/
 
-/* A (rather unimpressive) logo for the splash screen. */ 
+/*A (rather unimpressive) logo for the splash screen. */ 
 
 const char logo[] =
-  "                                                                                " /*  0 */
-  "                                                                                " /*  1 */
-  "                                                                                " /*  2 */
-  "                                                                                " /*  3 */
-  "                                                                                " /*  4 */
-  "                                                                                " /*  6 */
-  "                                                                                " /*  5 */
-  "                                                                                " /*  6 */
-  "                                                                                " /*  7 */
-  "           #####    #####           ########        #####      #####            " /*  8 */
-  "            ####   ####              ###   ###    ##   ###   ##    ##           " /*  9 */
-  "            # ###  # ##   ###   ###  ###   ###  ###     ###  ###                " /* 10 */
-  "           ## ### #  ##    ###  ##   ###   ###  ###     ###   #####             " /* 11 */
-  "           #   ####  ##    ###  ##   ###   ###  ###    ###       ###            " /* 12 */
-  "          ##   ###   ##     ## ##   ###   ###   ###    ##   ##    ##            " /* 13 */
-  "         ####  ##  ######   ###    ########       #####     ######              " /* 14 */
-  "                            ##                                                  " /* 15 */
-  "                        ####                                                    " /* 16 */
-  "                                                                                " /* 17 */
-  "                                                                                " /* 18 */
-  "                                                                                " /* 19 */
-  "                                                                                " /* 20 */
-  "                                                                                " /* 21 */
-  "                                                                                " /* 22 */
-  "                                                                                " /* 23 */
-  "                                                                                " /* 22 */
-  "                                                                                " /* 23 */
-  ;
-  
+ "                                                                                "
+ "                                                                                "
+ "                                                                                "
+ "                                                                                "
+ "                                                                                "
+ "                                                                                "
+ "                                                                                "
+ "                                                                                "
+ "                                                          )    (                "
+ "                            (                         ( /(    )\\/ )             "
+ "                            )\\/    (       (       )   )\\())  (()/(             "
+ "                          (((_)   )(     ))\\/   ( /(  ((_)\\    /(_))            "
+ "                          )\\/___  (()\\   /((_)  )\\())   ((_)  (_))              "
+ "                         ((/ __|  ((_) (_))(  ((_)\\/   / _ \\  / __|             "
+ "                          | (__  | '_| | || | \\/ \ /  | (_) | \\__ \\             "
+ "                           \\/___| |_|    \\_,_| /_\\_\\   \\___/  |___/             "
+ "                                                                                "
+ "                                                                                "
+ "                                                                                "
+ "                                                                                "
+ "                                                                                "
+ "                                                                                "
+ "                                                                                "
+ "                                                                                "
+ "                                                                                "
+ ;
+ 
+
+

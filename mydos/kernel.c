@@ -42,7 +42,7 @@ void shell()
 {
   int i;
   clear();
-  kwrite("TinyDOS 1.0\n");
+  kwrite("CruxOS 1.0: forked from TinyDOS\n");
 
   while (go_on)
   {
