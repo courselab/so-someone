@@ -73,4 +73,4 @@ libcruxos.a : libcruxos.o
 .PHONY: clean
 
 clean:
-	rm -f *.bin *.o *~ *.s *.a
+	rm -f *.bin *.o *~ *.s *.a *.img

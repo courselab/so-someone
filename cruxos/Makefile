@@ -16,7 +16,7 @@ dos=$(shell basename $$(realpath .))
 
 # Link all objects needed by the OS.
 
-$(dos).bin : bootloader.o bios1.o kernel.o kaux.o bios2.o logo.o syscall.o
+$(dos).bin : bootloader.o bios1.o kernel.o kaux.o bios2.o logo.o syscall.o tyfs.o
 	ld -melf_i386 -T cruxos.ld --orphan-handling=discard $^ -o $@
 
 # Here we are statically linking the user program 'prob.bin' into the kernel,
@@ -67,73 +67,19 @@ libcruxos.o : cruxos.h
 libcruxos.a : libcruxos.o
 	ar rcs $@ $^
 
-# Housekeeping.
+tyfsedit.bin : tyfsedit.c
+	gcc tyfsedit.c -lm -o tyfsedit.bin
 
-.PHONY: clean
-
-clean:
-	rm -f *.bin *.o *~ *.s *.a
-# By default, the bootable program name will be cruxos.bin
-# If you export this directory to extend the example as part of a programming
-# exercise, redefine $(dos) to reflect your own DOS name, say
-# dos = "amazingOS"
-
-dos="cruxos"
-
-# Build the OS and an example user program.
-
-# Link all objects needed by the OS.
-
-$(dos).bin : bootloader.o bios1.o kernel.o kaux.o bios2.o logo.o syscall.o
-	ld -melf_i386 -T cruxos.ld --orphan-handling=discard $^ -o $@
-
-# Here we are statically linking the user program 'prob.bin' into the kernel,
-# so as to simulate the execution of a user program. If we were to actually load
-# and execute an external program, we should remove 'prog.o' and 'libcruxos.o'
-# from the list of pre-requisites, and edit the linker script accordingly.
-# Comment out the following line if this is the case.
-
-$(dos).bin : prog.o libcruxos.o
-
-# Rules to build objects from either C or assembly code.
-
-%.o : %.c
-	gcc -m16 -O0 --freestanding -fno-pic $(NO_CF_PROTECT) -c  $< -o $@
-
-%.o : %.S
-	as -32 $< -o $@
-
-bootloader.o : bios1.h kernel.h
-kernel.o : bios1.h bios2.h kernel.h kaux.h
-kaux.o:    bios2.h kaux.h
-
-$(dos).bin : .EXTRA_PREREQS = rt0.o cruxos.ld
-
-# Rules to build the user programs
-# You would add new programs to this variable if bulding other user programs.
-# The user library is automatically added by the linker script.
-
-progs = prog.bin
-
-$(progs)  : %.bin : %.o libcruxos.a
-	ld -melf_i386 -T prog.ld --orphan-handling=discard $< -o $@
-
-$(progs:%.bin=%.o) : %.o : %.c cruxos.h
-	gcc -m16 -O0 --freestanding -fno-pic $(NO_CF_PROTECT) -c $< -o $@
-
-$(progs:%.bin=%.o) : cruxos.h
-
-$(progs:%.bin=%.o) : .EXTRA_PREREQS = prog.ld
-
-# Recipes to build the user library.
-
-libcruxos.o: libcruxos.c cruxos.h
-	gcc -m16 -O0 --freestanding -fno-pic $(NO_CF_PROTECT) -c  $< -o $@
-
-libcruxos.o : cruxos.h
-
-libcruxos.a : libcruxos.o
-	ar rcs $@ $^
+BOOTSECTORS=30
+TYFS_HEADER_SIZE=16
+# Create a 1.44 MB floppy image (2880 * 512 bytes)
+disk.img: $(dos).bin tyfsedit.bin
+	rm -f $@
+	dd if=/dev/zero of=$@ count=2880
+	./format -r $(BOOTSECTORS) $@
+	dd if=$< of=$@ obs=1 seek=$(TYFS_HEADER_SIZE) conv=notrunc
+	./put kernel.c $@
+	./put tyfs.c $@
 
 # Housekeeping.
 
@@ -141,12 +87,5 @@ libcruxos.a : libcruxos.o
 
 clean:
 	rm -f *.bin *.o *~ *.s *.a *.img
-
-# Create a 1.44 MB floppy image (2880 * 512 bytes)
-disk.img:
-	rm -f $@
-	dd if=/dev/zero of=$@ count=2880
-	./format -r 10 $@
-
 # SYSeg's  convenience rules (not related to the example itself)
 include bintools.mk

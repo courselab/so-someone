@@ -15,7 +15,7 @@
            by the bootloader (so as to respect the 512-byte length limit).*/
 
 	.code16gcc
-	.global kread, udelay, register_syscall_handler, sys_write
+	.global kread, udelay, register_syscall_handler, sys_write, load_dir
 
 	.section .text
 
@@ -123,16 +123,28 @@ syscall_table:
 	.long sys_exit		/* Syscall 1: exit.      */
 	.long sys_write		/* Syscall 2: write      */
 
+load_dir:
+	pusha
+	mov boot_drive, %dl
+	mov $0x2, %ah
+	mov $44, %al
+	mov $0, %ch /* c */
+	mov $0, %dh /* h */
+	mov $30, %cl /* s */
+	mov $_DIR_ADDR, %bx
+	int $0x13
+
+	mov $err_load_dir, %cx
+	jc fatal
+	popa
+	ret
+
+
 	/* Read-only data. */
 
 	.section .rodata
 	.align 4
-
-
-msg_err_lprg:
-	.string "Error loading program\n"
-msg_err_read:
-	.string "Drive read error\n"
+err_load_dir: .string "Error loading directories\n"
 
 
      /* Notes.
